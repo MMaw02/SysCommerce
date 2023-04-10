@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<aside th:replace="layout/layout :: sidebar"></aside>
+	<main id="main" class="main">
+		<div class="pagetitle">
+<!--			<h1 th:text="${titulo}"></h1>-->
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/index">Home</a></li>
+					<li class="breadcrumb-item">Clientes</li>
+					<li class="breadcrumb-item"><a href="/listar">Tabla</a></li>
+<!--					<li class="breadcrumb-item active" th:text="${subTitulo}"></li>-->
+				</ol>
+			</nav>
+		</div>
+		<section class="section">
+			<div class="row">
+				<div class="col-lg">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${titulo}"></h5>
+							<form th:action="@{/factura/save}" th:object="${factura}" method="post">
+<!--								<input type="text" id="id" name="id" th:value="${id}" hidden>-->
+<!--								<div class="row mb-3">-->
+<!--									<label for="inputText" class="col-sm-2 col-form-label">Nombre</label>-->
+<!--									<div class="col-sm-10">-->
+<!--										<input type="text" class="form-control" id="buscar_usuario"-->
+<!--										th:errorclass="'form-control alert-danger'">-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<input type="text" id="id" name="id" th:value="${id}" hidden>-->
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">DNI del usuario:</label>
+									<div class="col-sm-10">
+										<input type="text" id="buscar_usuario" name="buscar_usuario" class="form-control">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Descripción:</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{descripcion}" class="form-control" />
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Observacion:</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{observacion}" class="form-control"/>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Buscar Producto:</label>
+									<div class="col-sm-10">
+										<input type="text" id="buscar_producto"  name="buscar_producto" class="form-control" />
+									</div>
+								</div>
+								<table th:replace="factura/plantilla-items :: itemsFactura"></table>
+
+								<table id="cargarItemProductos" class="table table-sm table-striped table-hover">
+									<thead>
+									<tr>
+										<th>Imagen</th>
+										<th>Nombre</th>
+										<th>Precio</th>
+										<th>Cantidad</th>
+										<th>Total</th>
+										<th>Eliminar</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+								<h5>Total: <span id="gran_total">0</span></h5>
+								<input type="submit">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script type="text/javascript" th:replace="factura/autocomplete-usuarios :: javascript" ></script>
+	<script type="text/javascript" th:replace="factura/autocomplete-productos :: javascript" ></script>
+</body>
+</html>

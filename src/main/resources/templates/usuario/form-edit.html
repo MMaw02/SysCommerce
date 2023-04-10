@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<aside th:replace="layout/layout :: sidebar"></aside>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1 th:text="${titulo}"></h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/index">Home</a></li>
+					<li class="breadcrumb-item">Clientes</li>
+					<li class="breadcrumb-item"><a href="/listar">Tabla</a></li>
+<!--					<li class="breadcrumb-item active" th:text="${subTitulo}"></li>-->
+				</ol>
+			</nav>
+		</div>
+		<section class="section">
+			<div class="row">
+				<div class="col-lg">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${titulo}"></h5>
+							<form th:action="@{/usuario/save}" th:object="${usuario}" method="post" enctype="multipart/form-data">
+								<input type="text" id="id" name="id" th:value="${id}" hidden>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Nombre</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" th:field="*{nombre}"
+										th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Apellido</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" th:field="*{apellido}"
+											th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('apellido')}"
+											th:errors="*{apellido}"></small>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">dni</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control" th:field="*{dni}"
+											   th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('dni')}"
+											th:errors="*{dni}"></small>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+									<div class="col-sm-10">
+										<input type="email" class="form-control" th:field="*{email}"
+											th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Direccion</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" th:field="*{direccion}"
+											   th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('direccion')}"
+											th:errors="*{direccion}"></small>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Telefono</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" th:field="*{telefono}"
+											   th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('telefono')}"
+											th:errors="*{telefono}"></small>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">Rol</label>
+									<div class="col-sm-10">
+										<select class="form-control" th:field="*{role.rol}">
+											<option value="ADMIN">ADMIN</option>
+											<option value="USER">USER</option>
+											<option value="CUSTOMER">CUSTOMER</option>
+										</select>
+<!--										<input type="text" class="form-control" value="CUSTOMER" id="role.rol" name="role.rol"-->
+<!--											   th:errorclass="'form-control alert-danger'">-->
+										<small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('role.rol')}"
+											th:errors="*{role.rol}"></small>
+									</div>
+								</div>
+								<input type="file" id="file" name="file">
+<!--								<div class="row mb-3">-->
+<!--									<label for="inputText" class="col-sm-2 col-form-label">Subir Foto</label>-->
+<!--									<div class="col-sm-10">-->
+<!--										<input type="file" class="form-control" name="file" id="file"-->
+<!--											   th:errorclass="'form-control alert-danger'">-->
+<!--									</div>-->
+<!--								</div>-->
+								<div class="row mb-3">
+									<label class="col-sm-2 col-form-label">Crear Cliente</label>
+									<div class="col-sm-10">
+										<button type="submit" class="btn btn-primary">Enviar</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

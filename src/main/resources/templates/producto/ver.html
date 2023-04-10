@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<aside th:replace="layout/layout :: sidebar"></aside>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1 th:text="${titulo}"></h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/index">Inicio</a></li>
+					<li class="breadcrumb-item">Clientes</li>
+					<li class="breadcrumb-item active">Tabla</li>
+				</ol>
+			</nav>
+		</div>
+		<section class="section">
+			<div class="row gy-4">
+<!--				<div class="col-lg">-->
+<!--					<div class="card">-->
+<!--						<div class="card-body">-->
+<!--							<h5 class="card-title" th:text="${titulo}"></h5>-->
+							<div class="col-xl-6">
+								<div class="card p-4">
+									<img th:src="@{'/images/' + ${producto.foto}}" class="d-block w-100">
+								</div>
+							</div>
+							<div class="col-xl-6">
+								<div class="card p-4">
+									<h5 class="card-title">Detalle del Producto</h5>
+									<div class="row pt-4">
+										<div class="col-lg-3 col-md-4 label">Nombre</div>
+										<div class="col-lg-9 col-md-8" th:text="${producto.nombre}">Jassa</div>
+									</div>
+									<div class="row pt-4">
+										<div class="col-lg-3 col-md-4 label ">Descripcion</div>
+										<div class="col-lg-9 col-md-8" th:text="${producto.descripcion}">Jassa</div>
+									</div>
+									<div class="row pt-4">
+										<div class="col-lg-3 col-md-4 label ">Precio</div>
+										<div class="col-lg-9 col-md-8" th:text="${producto.precio}">Jassa</div>
+									</div>
+									<div class="row pt-4">
+										<div class="col-lg-3 col-md-4 label ">Fecha Creacion</div>
+										<div class="col-lg-9 col-md-8" th:text="${producto.createdAt}">Jassa</div>
+									</div>
+									<div class="row pt-4">
+										<div class="col-lg-3 col-md-4 label ">Fecha Edicion</div>
+										<div class="col-lg-9 col-md-8" th:text="${producto.updatedAt}">Jassa</div>
+									</div>
+								</div>
+							</div>
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+			</div>
+		</section>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

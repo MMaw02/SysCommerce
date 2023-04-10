@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: sidebar"></aside>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 th:text="${titulo}"></h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/index">Inicio</a></li>
+                <li class="breadcrumb-item">Clientes</li>
+                <li class="breadcrumb-item active">Tabla</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section">
+        <div class="row gy-4">
+<!--            Perfil usuario-->
+            <div class="col-lg-4 section profile">
+                <div class="card p-4">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img th:src="@{'/images/'+ ${factura.usuario.foto}}" alt="Profile" class="rounded-circle">
+                        <h2 th:text="${factura.usuario.nombre}">Jassa</h2>
+                        <h2 th:text="${factura.usuario.apellido}">Jassa</h2>
+                        <h3 th:text="${factura.usuario.dni}">Web Designer</h3>
+                        <p th:text="${factura.usuario.telefono}"></p>
+                        <p th:text="${factura.usuario.direccion}"></p>
+                    </div>
+                </div>
+            </div>
+<!--            Facturacion Detalles y Producto-->
+            <div class="col-lg-8">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Reports</h5>
+                            <div class="row">
+                            <div class="col-lg-6">
+                                <h3>Descripción:</h3>
+                                <p th:text="${factura.descripcion}"></p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="alert alert-warning alert-dismissible fade show">
+                                    <h4>Observación</h4>
+                                    <p th:if="${factura.observacion} == null">No hay observación</p>
+                                    <p th:unless="${factura.observacion} == null" th:text="${factura.observacion}"></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-12">
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">Lista de Productos</h5>
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Unidades</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="linea: ${factura.items}">
+                                    <th scope="row"><img th:src="@{'/images/'+ ${linea.producto.foto}}" alt="" style="width: 60px;"></th>
+                                    <td><a th:href="@{/producto/ver/} + ${linea.producto.id}" class="text-primary fw-bold" th:text="${linea.producto.nombre}"></a>
+                                    </td>
+                                    <td th:text="${linea.producto.precio}">$64</td>
+                                    <td class="fw-bold" th:text="${linea.cantidad}">124</td>
+                                    <td th:text="${linea.calcularImporte()}">$5,828</td>
+                                </tr>
+                                <tr>
+                            </tbody>
+                        </table>
+                        <h3>Gran total: <span th:text="${factura.total}"></span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

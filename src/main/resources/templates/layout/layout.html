@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet" />
+<!--   <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">-->
+   <link
+           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+           rel="stylesheet"
+           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+           crossorigin="anonymous">
+   <link th:href="@{/css/style.css}" rel="stylesheet">
+   <link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+   <!--   <link href="/bootstrap/css/bootstrap-icons.css" rel="stylesheet">-->
+   <title th:text="'RapidWork - ' + ${titulo}"></title>
+</head>
+<body>
+	<header th:fragment="header" id="header" class="header fixed-top d-flex align-items-center" >
+       <div class="d-flex align-items-center justify-content-between"> <a th:href="@{/home}" class="logo d-flex align-items-center"> <img src="/img/logo.png" alt=""> <span class="d-none d-lg-block">Admin</span> </a> <i class="bi bi-list toggle-sidebar-btn"></i></div>
+       <nav class="header-nav ms-auto" th:unless="${user.id == null}">
+          <ul class="d-flex align-items-center">
+             <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown"> <img th:src="@{'/images/'+ ${user.usuario.foto}}" alt="Profile" class="rounded-circle"> <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${user.usuario.nombre}">Jassa</span> </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                   <li class="dropdown-header">
+                      <span th:text="${user.rol}">Web Designer</span>
+                   </li>
+                   <li>
+                      <hr class="dropdown-divider">
+                   </li>
+                   <li> <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}"> <i class="bi bi-box-arrow-right"></i> <span>Sign Out</span> </a></li>
+                </ul>
+             </li>
+          </ul>
+       </nav>
+	</header>
+	<aside id="sidebar" class="sidebar" th:fragment="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+         <li class="nav-item">
+            <a class="nav-link" th:href="@{/home}">
+               <i class="bi bi-grid"></i> <span>Dashboard</span>
+            </a>
+         </li>
+         <li class="nav-heading">Paginas</li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#usuarios-nav" data-bs-toggle="collapse" href="#">
+               <i class="bi bi-person-badge"></i></i><span>Usuarios</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="usuarios-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+               <li>
+                  <a th:href="@{/usuario/list}">
+                     <i class="bi bi-circle"></i><span>Lista de Usuarios</span>
+                  </a>
+               </li>
+               <li>
+                  <a th:href="@{/usuario/form}">
+                     <i class="bi bi-circle"></i><span>Registrar Usuario</span>
+                  </a>
+               </li>
+            </ul>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#productos-nav" data-bs-toggle="collapse" href="#">
+               <i class="bi bi-person-add"></i></i><span>Productos</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="productos-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+               <li>
+                  <a th:href="@{/producto/list}">
+                     <i class="bi bi-circle"></i><span>Lista de Productos</span>
+                  </a>
+               </li>
+               <li>
+                  <a th:href="@{/usuario/form}">
+                     <i class="bi bi-circle"></i><span>Registrar Producto</span>
+                  </a>
+               </li>
+            </ul>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#facturacion-nav" data-bs-toggle="collapse" href="#">
+               <i class="bi bi-card-checklist"></i></i><span>Facturacion</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="facturacion-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+               <li>
+                  <a th:href="@{/factura/list}">
+                     <i class="bi bi-circle"></i><span>Lista de Facturacion</span>
+                  </a>
+               </li>
+               <li>
+                  <a th:href="@{/factura/form}">
+                     <i class="bi bi-circle"></i><span>Crear una Facturacion</span>
+                  </a>
+               </li>
+            </ul>
+         </li>
+           <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#reporte-nav" data-bs-toggle="collapse" href="#">
+               <i class="bi bi-activity"></i><span>Reporte</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="reporte-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+
+               <li>
+                  <a href="/formUsuario">
+                     <i class="bi bi-circle"></i><span>Generar Reporte</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="/formUsuario">
+                     <i class="bi bi-circle"></i><span>Actualizar</span>
+                  </a>
+               </li>
+            </ul>
+         </li>
+           <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#envios-nav" data-bs-toggle="collapse" href="#">
+               <i class="bi bi-bus-front-fill"></i><span>Envíos</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="envios-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+               <li>
+                  <a href="/listarUsuario">
+                     <i class="bi bi-circle"></i><span>Generar reporte</span>
+                  </a>
+               </li>
+
+            </ul>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+               <i class="bi bi-bar-chart-line-fill"></i><span>Gráficos</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+               <li>
+                  <a href="/listarUsuario">
+                     <i class="bi bi-circle"></i><span>Agregar Producto</span>
+                  </a>
+               </li>
+
+
+            </ul>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#producto-nav" data-bs-toggle="collapse" href="#">
+               <i class="bi bi-grid"></i></i><span>Producto</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="producto-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+               <li>
+                  <a href="/listarProducto">
+                     <i class="bi bi-circle"></i><span>Lista de Producto</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="/formProducto">
+                     <i class="bi bi-circle"></i><span>Registrar Producto</span>
+                  </a>
+               </li>
+
+            </ul>
+         </li>
+
+         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#ventas-nav" data-bs-toggle="collapse" href="#">
+               <i class="bi bi-receipt"></i><span>Ventas</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="ventas-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+               <li>
+                  <a href="/listarUsuario">
+                     <i class="bi bi-circle"></i><span>Agregar Producto</span>
+                  </a>
+               </li>
+
+            </ul>
+         </li>
+         <div class="space"></div>
+         <li class="nav-item exit">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-box-arrow-right"></i><span>Salir</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+
+         </li>
+      </ul>
+   </aside>
+	<!-- Footer -->
+	<footer id="footer" class="footer" th:fragment="footer">
+      <div class="copyright">
+         Copyright &copy; 2023 <strong><span>Anthony Montes<za</span></strong>. All Rights Reserved
+      </div>
+<!--      <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+      <script th:src="@{/jquery/jquery-3.3.1.min.js}"></script>
+      <script th:src="@{/jquery/jquery-ui.min.js}"></script>
+      <script th:src="@{/js/main.js}"></script>
+   </footer>
+</body>
+</html>

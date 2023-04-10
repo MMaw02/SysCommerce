@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<aside th:replace="layout/layout :: sidebar"></aside>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1 th:text="${titulo}"></h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/index">Inicio</a></li>
+					<li class="breadcrumb-item">Clientes</li>
+					<li class="breadcrumb-item active">Tabla</li>
+				</ol>
+			</nav>
+		</div>
+		<section class="section">
+			<div class="row">
+				<div class="col-lg">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${titulo}"></h5>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">Id</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Descripcion</th>
+										<th scope="col">Precio</th>
+										<th scope="col">F. Creacion</th>
+										<th scope="col">Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="producto: ${productos}">
+										<td><a th:href="@{/producto/ver/} + ${producto.id}" th:text="${producto.id}"></a></td>
+										<td th:text="${producto.nombre}"></td>
+										<td th:text="${producto.descripcion}"></td>
+										<td th:text="'S/. ' + ${producto.precio}"></td>
+										<td th:text="${producto.createdAt}"></td>
+										<td class="icon">
+											<a th:href="@{/producto/delete/} + ${producto.id}"
+											   onclick="return confirm('Estas Seguro?');">
+												<i class="bi bi-trash"></i>
+											</a>
+<!--											<a class="btn btn-primary btn-sm boton"-->
+<!--											th:href="@{/form/} + ${usuario.id}" th:text="'editar'"></a>-->
+											<span> | </span>
+											<a th:href="@{/producto/form/} + ${producto.id}">
+												<i class="bi bi-pencil-square"></i>
+											</a>
+<!--											<a-->
+<!--											class="btn btn-danger btn-sm boton"-->
+<!--											th:href="@{/eliminar/} + ${usuario.id}" th:text="'eliminar'"-->
+<!--											onclick=" confirm('Estás seguro que quieres eliminar?');"></a>-->
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

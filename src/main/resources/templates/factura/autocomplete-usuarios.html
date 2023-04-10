@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {
+			$("#buscar_usuario").autocomplete({
+				source : function(request, response) {
+					$.ajax({
+						url : "/factura/cargar-usuarios/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(user) {
+								return {
+									value : user.dni,
+									label : user.dni,
+								};
+							}));
+						},
+					});
+				}
+			});
+		});
+	</script>
+</body>
+</html>
